@@ -8,7 +8,7 @@ use List::Util;
 use List::MoreUtils;
 
 our @ISA = qw(Exporter);
-our @EXPORT = qw(isCanonicalPerm normalize pretty mult);
+our @EXPORT = qw(isCanonicalPerm normalize pretty mult isUnit toCanonical inv isEqual order);
 
 # Test if a given perm is a valid canonical permutation
 # A canonical form consists of disjoint cycles with distinct elements
@@ -146,6 +146,7 @@ sub toCanonical {
 	# if $perm is unit
 	return [] if (! @$perm);
 
+	# put each cycle into a permutation
 	my @separateCyc = map { [$_] } @$perm;
 
 	return List::Util::reduce { mult($a, $b) } @separateCyc;
